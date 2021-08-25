@@ -20,7 +20,7 @@ bash Liner2Catcher.sh -t ala ma kota -s 10 > name_of_the_file.txt
 ```sh
 bash Liner2Catcher.sh -f file_name.txt -s 10 > name_of_the_file.txt
 ```
-### Flag
+### Flags
 * -t [Text to process]
 * -s [Number of seconds to wait for server to respond]
 * -f [Text file to process]
