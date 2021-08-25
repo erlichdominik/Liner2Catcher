@@ -2,21 +2,30 @@
 
 TEXT=""
 TIME=5
+IS_FILE=0
+FILE_NAME=""
 print_usage() {
   printf "Usage: ..."
 }
 
-while getopts 't:s:' flag; do
+while getopts 't:s:f:' flag; do
   case "${flag}" in
     t) TEXT="${OPTARG}" ;;
     s) TIME="${OPTARG}" ;;
+    f) FILE_NAME="${OPTARG}" ;;
     *) print_usage
        exit 1 ;;
   esac
 done
 
-FIRST_REQUEST=$(curl -d'{"lpmn":"any2txt|wcrft2|liner2({\"model\":\"top9\"})","text":'"$TEXT"',"application":"ws.clarin-pl.eu","user":"demo"}' -H "Content-Type: application/json" -X POST http://ws.clarin-pl.eu/nlprest2/base/startTask/)
-
+if [[ $FILE_NAME == "" ]]
+then
+    FIRST_REQUEST=$(curl -d'{"lpmn":"any2txt|wcrft2|liner2({\"model\":\"top9\"})","text":'"$TEXT"',"application":"ws.clarin-pl.eu","user":"demo"}' -H "Content-Type: application/json" -X POST http://ws.clarin-pl.eu/nlprest2/base/startTask/)
+    else
+    TEXT=`cat $FILE_NAME`
+    FIRST_REQUEST=$(curl -d'{"lpmn":"any2txt|wcrft2|liner2({\"model\":\"top9\"})","text":'"$TEXT"',"application":"ws.clarin-pl.eu","user":"demo"}' -H "Content-Type: application/json" -X POST http://ws.clarin-pl.eu/nlprest2/base/startTask/)
+fi
+    
 FIRST_RESPONSE_URI='http://ws.clarin-pl.eu/nlprest2/base/getStatus/'
 
 CONCAT_URI=$FIRST_RESPONSE_URI$FIRST_REQUEST
