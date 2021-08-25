@@ -1,6 +1,19 @@
 #!bin/bash
 
-TEXT=$1
+TEXT=""
+TIME=5
+print_usage() {
+  printf "Usage: ..."
+}
+
+while getopts 't:s:' flag; do
+  case "${flag}" in
+    t) TEXT="${OPTARG}" ;;
+    s) TIME="${OPTARG}" ;;
+    *) print_usage
+       exit 1 ;;
+  esac
+done
 
 FIRST_REQUEST=$(curl -d'{"lpmn":"any2txt|wcrft2|liner2({\"model\":\"top9\"})","text":'"$TEXT"',"application":"ws.clarin-pl.eu","user":"demo"}' -H "Content-Type: application/json" -X POST http://ws.clarin-pl.eu/nlprest2/base/startTask/)
 
@@ -9,7 +22,8 @@ FIRST_RESPONSE_URI='http://ws.clarin-pl.eu/nlprest2/base/getStatus/'
 CONCAT_URI=$FIRST_RESPONSE_URI$FIRST_REQUEST
 
 #echo 'waiting 5 seconds do download data...'
-sleep 5
+#echo "TIME:${TIME}"
+sleep $TIME
 FIRST_RESPONSE=`curl $CONCAT_URI`
 
 DOWNLOAD_URI='http://ws.clarin-pl.eu/nlprest2/base/download'
