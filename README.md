@@ -25,12 +25,3 @@ bash Liner2Catcher.sh -t ala ma kota -s 10 > name_of_the_file.txt
 # Warning
 
 Liner2Catcher is using simple sleep function inside, without -s flag it's waiting 5 seconds for server to respond, if it's not enough we can use -s flag to specify waiting time by ourself
-
-# Liner2Catcher
-Simple shell script to process text from Polish NLP library to CCL file
-
-# Requirements
-In Terminal type:
-xargs brew install < INSTALL.txt
-OR
-brew install jq
