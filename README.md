@@ -12,13 +12,13 @@ brew install jq
 ```
 ## Usage/Examples
 ```sh
-bash Liner2Catcher.sh -t ala ma kota > name_of_the_file.txt
+bash LinerCatcher.sh -t ala ma kota > name_of_the_file.txt
 ```
 ```sh
-bash Liner2Catcher.sh -t ala ma kota -s 10 > name_of_the_file.txt
+bash LinerCatcher.sh -t ala ma kota -s 10 > name_of_the_file.txt
 ```
 ```sh
-bash Liner2Catcher.sh -f file_name.txt -s 10 > name_of_the_file.txt
+bash LinerCatcher.sh -f file_name.txt -s 10 > name_of_the_file.txt
 ```
 ### Flags
 * -t [Text to process]
